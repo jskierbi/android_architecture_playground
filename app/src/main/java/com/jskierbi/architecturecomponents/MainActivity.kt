@@ -1,15 +1,11 @@
 package com.jskierbi.architecturecomponents
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleActivity
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.OnLifecycleEvent
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.*
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AlertDialog
+import com.jskierbi.architecturecomponents.ui.UserActivity
 import com.jskierbi.commons.logd
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,6 +38,7 @@ class MainActivity : LifecycleActivity() {
     }
     uiBtnLoadData1.setOnClickListener { subscribeLoadData("Param 1") }
     uiBtnLoadData2.setOnClickListener { subscribeLoadData("Param 2") }
+    uiRoomPlayground.setOnClickListener { startActivity(Intent(applicationContext, UserActivity::class.java)) }
   }
 
   override fun onDestroy() {

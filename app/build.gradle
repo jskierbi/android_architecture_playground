@@ -32,6 +32,25 @@ android {
   sourceSets {
     androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
   }
+
+  packagingOptions {
+    exclude 'META-INF/DEPENDENCIES.txt'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/notice.txt'
+    exclude 'META-INF/license.txt'
+    exclude 'META-INF/dependencies.txt'
+    exclude 'META-INF/LGPL2.1'
+  }
+}
+
+configurations.all {
+  resolutionStrategy {
+    force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  }
 }
 
 dependencies {
@@ -54,10 +73,16 @@ dependencies {
   annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha3"
   compile "android.arch.persistence.room:rxjava2:1.0.0-alpha3"
   kapt 'android.arch.persistence.room:compiler:1.0.0-alpha3'
+  androidTestCompile 'android.arch.persistence.room:testing:1.0.0-alpha3'
 
   // RxJava
   compile 'io.reactivex.rxjava2:rxjava:2.1.0'
   compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+  //Retrofit
+  compile 'com.squareup.retrofit2:retrofit:2.3.0'
+  compile 'com.squareup.retrofit2:converter-jackson:2.3.0'
+  compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 }
 repositories {
   mavenCentral()

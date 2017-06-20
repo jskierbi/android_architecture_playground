@@ -1,7 +1,9 @@
 package com.jskierbi.architecturecomponents.modules.user
 
 import android.arch.persistence.room.*
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity(tableName = "users", indices = arrayOf(Index(value = "user_name", unique = true)))
 data class User(@PrimaryKey(autoGenerate = true) var id: Long = -1,
                 @ColumnInfo(name = "user_name") var name: String = "",

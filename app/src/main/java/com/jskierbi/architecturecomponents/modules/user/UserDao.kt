@@ -1,6 +1,7 @@
 package com.jskierbi.architecturecomponents.modules.user
 
 import android.arch.persistence.room.*
+import io.reactivex.Flowable
 
 @Dao
 interface UserDao {
@@ -30,9 +31,12 @@ interface UserDao {
   fun deleteUsers(users: List<User>)
 
   @Query("SELECT * FROM users")
-  fun findAllUsers(): List<User>
+  fun findAllUsers(): Flowable<List<User>>
 
-  @Query("SELECT first_name, last_name FROM users")
-  fun findUserInformation(): List<UserInformation>
+  @Query("SELECT first_name, last_name, age FROM users")
+  fun findUserInformation(): Flowable<List<UserInformation>>
+
+//  @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
+//  fun findUserById(id: Int): Flowable<User>
 
 }
