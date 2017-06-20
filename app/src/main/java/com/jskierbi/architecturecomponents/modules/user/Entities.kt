@@ -8,7 +8,9 @@ data class User(@PrimaryKey(autoGenerate = true) var id: Long = -1,
                 @ColumnInfo(name = "user_password") var password: String = "",
                 @Embedded var userInformation: UserInformation = UserInformation())
 
-data class UserInformation(@ColumnInfo(name = "first_name") var firstName: String = "", @ColumnInfo(name = "last_name") var lastName: String = "")
+data class UserInformation(@ColumnInfo(name = "first_name") var firstName: String = "",
+                           @ColumnInfo(name = "last_name") var lastName: String = "",
+                           var age: Int = 0)
 
 @Entity(tableName = "user_billing_address",
     foreignKeys = arrayOf(ForeignKey(
