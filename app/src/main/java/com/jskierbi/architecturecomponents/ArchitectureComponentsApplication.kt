@@ -6,6 +6,6 @@ import com.jskierbi.architecturecomponents.core.persistence.ExampleDatabase
 
 class ArchitectureComponentsApplication : Application() {
 
-  val exampleDatabase: ExampleDatabase
-    get() = Room.databaseBuilder(applicationContext, ExampleDatabase::class.java, "architecture-components").build()
+  val exampleDatabase: ExampleDatabase by lazy { Room.databaseBuilder(applicationContext, ExampleDatabase::class.java, "architecture-components").build() }
+
 }
