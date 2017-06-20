@@ -6,7 +6,7 @@ import com.jskierbi.architecturecomponents.modules.user.BillingAddress
 import com.jskierbi.architecturecomponents.modules.user.User
 import com.jskierbi.architecturecomponents.modules.user.UserDao
 
-@Database(entities = arrayOf(User::class, BillingAddress::class), version = 1)
+@Database(entities = arrayOf(User::class, BillingAddress::class), version = 2)
 abstract class ExampleDatabase: RoomDatabase() {
   abstract fun userDao(): UserDao
 }
