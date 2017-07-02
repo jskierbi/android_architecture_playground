@@ -120,4 +120,15 @@ class UserDaoTest {
     }
   }
 
+  @Test
+  fun insertUsers() {
+    val users: MutableList<User> = mutableListOf()
+    users.add(user.copy())
+    users.add(user.copy(0, "foobar"))
+    database.userDao().insertUsers(users)
+    database.userDao().findAllUsers().test().assertValue {
+      it.size == 2
+    }
+  }
+
 }
