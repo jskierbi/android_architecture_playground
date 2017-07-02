@@ -35,10 +35,11 @@ open class MigrationTest {
 
     database.close()
 
-    database = migrationTestHelper.runMigrationsAndValidate(TEST_DB_NAME, 2, true, Migration_1_2())
+    database = migrationTestHelper.runMigrationsAndValidate(TEST_DB_NAME, 2, false, Migration_1_2())
 
     Assert.assertTrue(database.version == 2)
 
+    database.close()
   }
 
 

@@ -6,19 +6,25 @@ import io.reactivex.Flowable
 @Dao
 interface UserDao {
 
-  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  @Insert(onConflict = OnConflictStrategy.ROLLBACK)
   fun insertUser(user: User): Long
 
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun insertUserReplace(user: User)
+
   @Insert(onConflict = OnConflictStrategy.IGNORE)
+  fun insertUserIgnore(user: User)
+
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertUsers(users: List<User>): List<Long>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertUserAndBuddy(user: User, buddy: User)
 
-  @Insert(onConflict = OnConflictStrategy.ROLLBACK)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertUserAndBuddies(user: User, buddies: List<User>)
 
-  @Update(onConflict = OnConflictStrategy.IGNORE)
+  @Update(onConflict = OnConflictStrategy.REPLACE)
   fun updateUser(user: User): Int
 
   @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -36,7 +42,7 @@ interface UserDao {
   @Query("SELECT first_name, last_name, age FROM users")
   fun findUserInformation(): Flowable<List<UserInformation>>
 
-//  @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
-//  fun findUserById(id: Int): Flowable<User>
+  @Query("SELECT * FROM users WHERE id = :arg0 LIMIT 1")
+  fun findUserById(id: Long): Flowable<User>
 
 }
