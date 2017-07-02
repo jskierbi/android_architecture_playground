@@ -25,7 +25,7 @@ class UserActivity : AppCompatActivity() {
     uiAddUser.setOnClickListener {
       val userInformation = UserInformation("John", "Doe", 50)
       val user = User()
-      user.name = "john_doe"
+      user.name = "john_doe" + Math.random()
       user.password = "foobar"
       user.userInformation = userInformation
       userManager.persistUser(user)
@@ -38,7 +38,7 @@ class UserActivity : AppCompatActivity() {
     disposable = userManager.findAllUsers().subscribe({
       users ->
       users.forEach { user ->
-        uiUserDatabaseLog.append("Found User " + user.name)
+        uiUserDatabaseLog.append("Found User " + user.name + "\n")
       }
     },{
       loge(it)

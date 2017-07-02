@@ -6,6 +6,6 @@ import retrofit2.http.GET
 interface UserApiService {
 
   @GET("users")
-  fun getUsers(): Observable<List<User>>
+  fun getUsers(): Observable<MutableList<User>>
 
 }

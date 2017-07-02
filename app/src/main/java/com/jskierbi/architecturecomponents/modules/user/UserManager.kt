@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
+import java.sql.SQLIntegrityConstraintViolationException
 
 class UserManager(val application: ArchitectureComponentsApplication) {
 
@@ -33,11 +34,15 @@ class UserManager(val application: ArchitectureComponentsApplication) {
         .subscribe()
   }
 
-  fun persistUsers(users: List<User>) {
-    userDao.insertUsers(users)
+  fun persistUsers(users: MutableList<User>) {
+    try {
+      userDao.insertUsers(users)
+    } catch (exception: SQLIntegrityConstraintViolationException) {
+      userDao.updateUsers(users)
+    }
   }
 
-  fun getUsers(): Single<List<User>> {
+  fun getUsers(): Single<MutableList<User>> {
     return userService.getUsers()
         .subscribeOn(Schedulers.io())
         .observeOn(Schedulers.io())
